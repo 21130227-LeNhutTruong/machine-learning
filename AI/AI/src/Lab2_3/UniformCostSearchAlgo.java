@@ -1,4 +1,4 @@
-package Lab2;
+package Lab2_3;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,11 +98,11 @@ public class UniformCostSearchAlgo implements ISearchAlgo {
 					child.setPathCost(newPathCost);
 					priorityQueue.add(child);
 				} else if (priorityQueue.contains(child) && newPathCost < child.getPathCost()) {
-					// Nếu tìm thấy một đường đi ngắn hơn, cập nhật chi phí đường đi của con
+					// Nếu tìm thấy một đư�?ng đi ngắn hơn, cập nhật chi phí đư�?ng đi của con
 					child.setParent(current);
 					child.setPathCost(newPathCost);
 
-					// Cập nhật hàng đợi ưu tiên bằng cách loại bỏ và thêm lại con
+					// Cập nhật hàng đợi ưu tiên bằng cách loại b�? và thêm lại con
 					priorityQueue.remove(child);
 					priorityQueue.add(child);
 				}

@@ -1,4 +1,4 @@
-package Lab2;
+package Lab2_3;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,29 +7,31 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-public class BFS implements ISearchAlgo {
-	// Breadth-First Search
-	public static Node BreadthFirstSearchAlgo(Node root, String goalLabel) {
-		Queue<Node> queue = new LinkedList<>();
+public class DFS implements ISearchAlgo {
+
+	// Depth-First Search
+	public static Node depthFirstSearch(Node node, String goalLabel) {
 		Set<String> visited = new HashSet<>();
+		return depthFirstSearchRecursive(node, goalLabel, visited);
+	}
 
-		queue.add(root);
-		visited.add(root.getLabel());
+	private static Node depthFirstSearchRecursive(Node current, String goalLabel, Set<String> visited) {
+		if (current.getLabel().equals(goalLabel)) {
+			return current; // Goal found
+		}
 
-		while (!queue.isEmpty()) {
-			Node current = queue.poll();
-			if (current.getLabel().equals(goalLabel)) {
-				return current; // Goal found
-			}
+		visited.add(current.getLabel());
 
-			for (Node child : current.getChildrenNodes()) {
-				if (!visited.contains(child.getLabel())) {
-					child.setParent(current);
-					queue.add(child);
-					visited.add(child.getLabel());
+		for (Node child : current.getChildrenNodes()) {
+			if (!visited.contains(child.getLabel())) {
+				child.setParent(current);
+				Node result = depthFirstSearchRecursive(child, goalLabel, visited);
+				if (result != null) {
+					return result;
 				}
 			}
 		}
+
 		return null; // Goal not found
 	}
 
@@ -90,6 +92,8 @@ public class BFS implements ISearchAlgo {
 				}
 			}
 		}
+		
+		
 
 		System.out.println();
 		return null;

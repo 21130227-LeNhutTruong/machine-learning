@@ -1,6 +1,6 @@
-package Lab2;
+package lab4;
 
-public class Edge implements Comparable<Edge>{
+public class Edge {
 	private Node begin;
 	private Node end;
 	private double weight;
@@ -30,9 +30,5 @@ public class Edge implements Comparable<Edge>{
 	public double getWeight() {
 		return weight;
 	}
-
-	@Override
-	public int compareTo(Edge o) {
-		return -this.end.getLabel().compareTo(o.getEnd().getLabel());
-	}
+	
 }

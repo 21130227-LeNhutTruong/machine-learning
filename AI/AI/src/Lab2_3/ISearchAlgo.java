@@ -1,4 +1,4 @@
-package Lab2;
+package Lab2_3;
 
 
 public interface ISearchAlgo {
