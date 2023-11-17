@@ -7,34 +7,33 @@ import java.util.Set;
 public class GreedyBestFirstSearchAlgo implements IInformedSearchAlgo {
 
 	@Override
-    public Node execute(Node root, String goal) {
-        PriorityQueue<Node> openSet = new PriorityQueue<>(new GreedyComparator(goal));
-        Set<Node> closedSet = new HashSet<>();
+	public Node execute(Node root, String goal) {
+		PriorityQueue<Node> openSet = new PriorityQueue<>(new GreedyComparator(goal));
+		Set<Node> closedSet = new HashSet<>();
 
-        openSet.add(root);
+		openSet.add(root);
+		while (!openSet.isEmpty()) {
+			Node current = openSet.poll();
 
-        while (!openSet.isEmpty()) {
-            Node current = openSet.poll();
+			if (current.getLabel().equals(goal)) {
+				return current; // Goal node found
+			}
 
-            if (current.getLabel().equals(goal)) {
-                return current; // Goal node found
-            }
+			closedSet.add(current);
 
-            closedSet.add(current);
+			for (Node neighbor : current.getChildrenNodes()) {
+				if (closedSet.contains(neighbor)) {
+					continue; // Skip nodes in the closed set
+				}
 
-            for (Node neighbor : current.getChildrenNodes()) {
-                if (closedSet.contains(neighbor)) {
-                    continue; // Skip nodes in the closed set
-                }
+				if (!openSet.contains(neighbor)) {
+					openSet.add(neighbor);
+				}
+			}
+		}
 
-                if (!openSet.contains(neighbor)) {
-                    openSet.add(neighbor);
-                }
-            }
-        }
-
-        return null; // No path to the goal
-    }
+		return null; // No path to the goal
+	}
 
 	@Override
 	public Node execute(Node root, String start, String goal) {
